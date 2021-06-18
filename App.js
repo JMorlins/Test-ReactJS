@@ -1,37 +1,28 @@
-import React, { useState, useCallback } from 'react'
-import List from './List'
+import React from 'react';
+import './App.css';
+import 'antd/dist/antd.css';
 
-export default function App() {
-  const [number, setNumber] = useState(1)
-  const [dark, setDark] = useState(false)
+import AppHeader from './components/common/header';
+import AppFooter from './components/common/footer';
+import AppHome from './views/home';
 
-  const getItems = useCallback(
-    (incrementer) => {
-      return [
-        number + incrementer,
-        number + 1 + incrementer,
-        number + 2 + incrementer,
-      ]
-    },
-    [number]
-  )
+import { Layout } from 'antd';
+const { Header, Content, Footer } = Layout;
 
-  const theme = {
-    backgroundColor: dark ? '#333' : '#fff',
-    color: dark ? '#fff' : '#333',
-  }
-
+function App() {
   return (
-    <div style={theme}>
-      <input
-        type="number"
-        value={number}
-        onChange={(e) => setNumber(parseInt(e.target.value))}
-      />
-      <button onClick={() => setDark((prevDark) => !prevDark)}>
-        Toggle Theme
-      </button>
-      <List getItems={getItems} />
-    </div>
-  )
+    <Layout className="mainLayout">
+      <Header>
+        <AppHeader/>
+      </Header>
+      <Content>
+        <AppHome/>
+      </Content>
+      <Footer>
+        <AppFooter/>  
+      </Footer>      
+    </Layout>
+  );
 }
+
+export default App;
